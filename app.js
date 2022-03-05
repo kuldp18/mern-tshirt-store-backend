@@ -25,21 +25,22 @@ mongoose
   });
 
 // global middlewares
-app.use(function (req, res, next) {
-  res.header(
-    'Access-Control-Allow-Origin',
-    'https://mern-tshirt-store.netlify.app'
-  ); // update to match the domain you will make the request from
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  );
-  next();
-});
 
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cors());
+
+const whitelist = ['https://mern-tshirt-store.netlify.app'];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 // My routes
 app.use('/api', authRoutes);
