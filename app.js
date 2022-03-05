@@ -26,7 +26,7 @@ mongoose
 
 // global middlewares
 app.use(function (req, res, next) {
-  req.header(
+  res.header(
     'Access-Control-Allow-Origin',
     'https://mern-tshirt-store.netlify.app'
   ); // update to match the domain you will make the request from
