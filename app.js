@@ -28,19 +28,7 @@ mongoose
 
 app.use(bodyParser.json());
 app.use(cookieParser());
-
-const whitelist = ['https://mern-tshirt-store.netlify.app'];
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-};
-app.use(cors(corsOptions));
+app.use(cors({ origin: 'https://mern-tshirt-store.netlify.app' }));
 
 // My routes
 app.use('/api', authRoutes);
