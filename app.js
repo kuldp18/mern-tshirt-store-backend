@@ -25,12 +25,21 @@ mongoose
   });
 
 // global middlewares
+app.use(function (req, res, next) {
+  req.header(
+    'Access-Control-Allow-Origin',
+    'https://mern-tshirt-store.netlify.app'
+  ); // update to match the domain you will make the request from
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
 
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
-
-app.options('*', cors()); // include before other routes
 
 // My routes
 app.use('/api', authRoutes);
