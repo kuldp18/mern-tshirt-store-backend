@@ -30,6 +30,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
 
+app.options('*', cors()); // include before other routes
+
 // My routes
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);
