@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const cors = require('cors');
+const corsMiddleware = require('./cors');
 
 // my routes
 const authRoutes = require('./routes/auth');
@@ -28,7 +28,8 @@ mongoose
 
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cors({ origin: 'https://mern-tshirt-store.netlify.app' }));
+app.options('*', corsMiddleware);
+app.use(corsMiddleware);
 
 // My routes
 app.use('/api', authRoutes);
