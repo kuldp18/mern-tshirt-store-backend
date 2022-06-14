@@ -42,6 +42,9 @@ app.use('/api', productRoutes);
 app.use('/api', orderRoutes);
 app.use('/api', stripeRoutes);
 app.use('/api', braintreeRoutes);
+app.get('/', (req, res) => {
+  res.json('MERN T-shirt store backend is working!');
+});
 // port
 const port = process.env.PORT || 8888;
 
