@@ -31,6 +31,9 @@ app.use(cookieParser());
 app.options('*', corsMiddleware);
 app.use(corsMiddleware);
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // My routes
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);
